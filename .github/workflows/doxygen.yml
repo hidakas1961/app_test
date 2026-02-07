@@ -19,12 +19,12 @@ jobs:
         run: sudo apt-get install -y doxygen graphviz
         
       - name: Run Doxygen
-        run: doxygen conf/doxyfile.txt # Doxyfileがある前提
+        run: doxygen doxyfile.txt # Doxyfileがある前提
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '../_doxy' # Doxygenの出力先フォルダを指定
+          path: _doxy # Doxygenの出力先フォルダを指定
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
