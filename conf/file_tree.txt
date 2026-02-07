@@ -1,0 +1,62 @@
+my_program
+├──.vscode
+│   ├──launch.json
+│   ├──settings.json
+│   └──tasks.json
+├──conf
+│   ├──doxyfile.txt
+│   ├──file_tree.txt
+│   ├──keybindings.json.txt
+│   ├──mainpage.txt
+│   ├──property.txt
+│   └──はてなブログ.txt
+├──inc
+│   ├──app
+│   │   └──program
+│   │       ├──program_def.h
+│   │       ├──program_sub.h
+│   │       ├──program.h
+│   │       └──program.hpp
+│   ├──lib
+│   │   └──lib_common
+│   │       ├──lib_common_def.h
+│   │       ├──lib_common_sub.h
+│   │       ├──lib_common.h
+│   │       └──lib_common.hpp
+│   └──common_def.h
+├──res
+│   ├──app
+│   │   └──program
+│   │       ├──program.manifest
+│   │       ├──res_program.h
+│   │       └──res_program.rc
+│   └──lib
+│       └──lib_common
+│           ├──res_lib_common.h
+│           └──res_lib_common.rc
+├──src
+│   ├──app
+│   │   └──program
+│   │       ├──program_sub.cpp
+│   │       └──program.cpp
+│   └──lib
+│       └──lib_common
+│           ├──lib_common_sub.cpp
+│           └──lib_common.cpp
+├──targets
+│   ├──app
+│   │   ├──dynamic
+│   │   │   └──program
+│   │   │       └──CMakeLists.txt
+│   │   └──static
+│   │       └──static_program
+│   │           └──CMakeLists.txt
+│   └──lib
+│       ├──dynamic
+│       │   └──lib_common
+│       │       └──CMakeLists.txt
+│       └──static
+│           └──static_lib_common
+│               └──CMakeLists.txt
+├──CMakeLists.txt
+└──CMakePresets.json

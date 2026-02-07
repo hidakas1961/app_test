@@ -1,0 +1,21 @@
+// 既定値を上書きするには、このファイル内にキー バインドを挿入します
+[
+  // ターミナルですべて選択
+  {
+    "key": "ctrl+a",
+    "command": "workbench.action.terminal.selectAll",
+    "when": "terminalFocus"
+  },
+  // すべての構成をビルド
+  {
+    "key": "ctrl+shift+f7",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Build CMake All"
+  },
+  // すべてのオブジェクトを削除
+  {
+    "key": "ctrl+shift+delete",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Delete CMake Objects"
+  }
+]
