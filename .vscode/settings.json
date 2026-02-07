@@ -92,5 +92,6 @@
   "workbench.editor.enablePreview": false,
   "files.exclude": {
     "**/_build/**": true
-  }
+  },
+  "git.untrackedChanges": "hidden"
 }
