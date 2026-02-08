@@ -47,7 +47,7 @@ namespace program {
             ::setlocale(LC_ALL, "");
             ::_setmode(_fileno(stdout), _O_U8TEXT);
             ::wprintf(L"-------------------------------------------------------------------------------\n");
-            ::wprintf(L"プログラムクラス：メイン関数\n");
+            ::wprintf(L"%ls：メイン関数\n", Program::GetObjectName());
             // モジュールファイルパス取得
             wchar_t buffer[MAX_PATH]{};
             ::GetModuleFileNameW(s_hInstance, buffer, sizeof buffer/sizeof buffer[0]);

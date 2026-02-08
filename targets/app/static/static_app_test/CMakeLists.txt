@@ -38,7 +38,7 @@ target_compile_definitions(${TARGET_NAME} PRIVATE
 )
 #------------------------------------------------------------------------------
 # リンクファイル
-target_link_libraries("${TARGET_NAME}" PRIVATE lib_common)
+target_link_libraries("${TARGET_NAME}" PRIVATE static_lib_common)
 #------------------------------------------------------------------------------
 # その他
 set(CMAKE_STATIC_LIBRARY_PREFIX "")

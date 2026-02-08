@@ -16,8 +16,6 @@
 #include "app_test/core/app_test_sub.h"
 #include "app_test/res_app_test.h"
 #include "lib_common/core/lib_common.h"
-#include "lib_common/core/lib_common_sub.h"
-#include "lib_common/res_lib_common.h"
 #include <locale.h>
 #include <io.h>
 #include <fcntl.h>
@@ -65,7 +63,7 @@ namespace program {
             ::setlocale(LC_ALL, "");
             ::_setmode(_fileno(stdout), _O_U8TEXT);
             ::wprintf(L"-------------------------------------------------------------------------------\n");
-            ::wprintf(L"プログラムクラス：メイン関数\n");
+            ::wprintf(L"%ls：メイン関数\n", Program::GetObjectName());
             // モジュールファイルパス取得
             wchar_t buffer[MAX_PATH]{};
             ::GetModuleFileNameW(s_hInstance, buffer, sizeof buffer/sizeof buffer[0]);
@@ -82,14 +80,12 @@ namespace program {
             ::wprintf(L"ターゲット種別：%ls\n", TARGET_TYPE);
             ::wprintf(L"プロジェクトディレクトリ：%ls\n", PROJECT_DIR);
             ::wprintf(L"モジュールファイルパス：%ls\n", buffer);
+            // テストアプリケーションクラスインスタンス取得
+            app_test::AppTest::GetInstance();
             // サブ関数
             FuncAppTestSub();
             // C言語関数
             FuncAppTestC();
-            // 共通ライブラリクラスインスタンス取得
-            LibCommon::GetInstance();
-            // テストアプリケーションクラスインスタンス取得
-            app_test::AppTest::GetInstance();
         } while (false);
 
         // 実行結果
@@ -156,6 +152,7 @@ namespace app_test {
     AppTest::AppTest() noexcept {
         ::wprintf(L"-------------------------------------------------------------------------------\n");
         ::wprintf(L"%ls：コンストラクタ\n", AppTest::GetObjectName());
+        AppTest::Init();
     }
 
     //-------------------------------------------------------------------------
@@ -163,17 +160,21 @@ namespace app_test {
     AppTest::~AppTest() noexcept {
         ::wprintf(L"-------------------------------------------------------------------------------\n");
         ::wprintf(L"%ls：デストラクタ\n", AppTest::GetObjectName());
+        AppTest::Exit();
     }
 
     //=========================================================================
-    // 公開関数
+    // 非公開関数
     //-------------------------------------------------------------------------
     // 初期化関数
     bool AppTest::Init() noexcept {
         // 処理ブロック
         bool result{};
         do {
-            ::wprintf(L"テストアプリケーションクラス：初期化関数\n");
+            ::wprintf(L"-------------------------------------------------------------------------------\n");
+            ::wprintf(L"%ls：初期化関数\n", AppTest::GetObjectName());
+            // 共通ライブラリクラスインスタンス取得
+            LibCommon::GetInstance();
         } while (false);
 
         // 実行結果
@@ -186,7 +187,8 @@ namespace app_test {
         // 処理ブロック
         bool result{true};
         do {
-            ::wprintf(L"テストアプリケーションクラス：終了関数\n");
+            ::wprintf(L"-------------------------------------------------------------------------------\n");
+            ::wprintf(L"%ls：終了関数\n", AppTest::GetObjectName());
         } while (false);
 
         // 実行結果
