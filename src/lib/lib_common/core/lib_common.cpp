@@ -15,6 +15,9 @@
 #include "lib_common/core/lib_common.h"
 #include "lib_common/core/lib_common_sub.h"
 #include "lib_common/res_lib_common.h"
+#include <locale.h>
+#include <io.h>
+#include <fcntl.h>
 
 //=============================================================================
 // C言語インクルードファイル
@@ -61,9 +64,16 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved) {
         if (DLL_PROCESS_ATTACH == dwReason) {
             // インスタンスハンドル取得
             s_hInstance = hInstance;
+            // 漢字出力
+            ::setlocale(LC_ALL, "");
+            ::_setmode(_fileno(stdout), _O_U8TEXT);
+            ::wprintf(L"-------------------------------------------------------------------------------\n");
+            ::wprintf(L"共通ライブラリ：アタッチ\n");
         }
         // 関数呼び出し理由チェック
         else if (DLL_PROCESS_DETACH == dwReason) {
+            ::wprintf(L"-------------------------------------------------------------------------------\n");
+            ::wprintf(L"共通ライブラリ：デタッチ\n");
         }
 
         // 成功！
@@ -144,16 +154,16 @@ namespace lib_common {
     // コンストラクタ
     LibCommon::LibCommon() noexcept {
         ::wprintf(L"-------------------------------------------------------------------------------\n");
-        ::wprintf(L"%lsコンストラクタ\n", LibCommon::GetObjectName());
+        ::wprintf(L"%ls：コンストラクタ\n", LibCommon::GetObjectName());
         Init();
     }
 
     //-------------------------------------------------------------------------
     // デストラクタ
     LibCommon::~LibCommon() noexcept {
-        ::wprintf(L"%lsデストラクタ\n", LibCommon::GetObjectName());
-        Exit();
         ::wprintf(L"-------------------------------------------------------------------------------\n");
+        ::wprintf(L"%ls：デストラクタ\n", LibCommon::GetObjectName());
+        Exit();
     }
 
     //=========================================================================
@@ -165,7 +175,8 @@ namespace lib_common {
         bool result{};
         do {
             // モジュールファイルパス取得
-            ::wprintf(L"共通ライブラリ初期化\n");
+            ::wprintf(L"-------------------------------------------------------------------------------\n");
+            ::wprintf(L"共通ライブラリクラス：初期化関数\n");
             // モジュールファイルパス取得
             wchar_t buffer[MAX_PATH]{};
             ::GetModuleFileNameW(s_hInstance, buffer, sizeof buffer/sizeof buffer[0]);
@@ -182,7 +193,6 @@ namespace lib_common {
             ::wprintf(L"ターゲット種別：%ls\n", TARGET_TYPE);
             ::wprintf(L"プロジェクトディレクトリ：%ls\n", PROJECT_DIR);
             ::wprintf(L"モジュールファイルパス：%ls\n", buffer);
-            ::wprintf(L"-------------------------------------------------------------------------------\n");
             // サブ関数
             FuncSub();
             // C言語関数
@@ -199,7 +209,8 @@ namespace lib_common {
         // 処理ブロック
         bool result{true};
         do {
-            ::wprintf(L"共通ライブラリ終了\n");
+            ::wprintf(L"-------------------------------------------------------------------------------\n");
+            ::wprintf(L"共通ライブラリクラス：終了関数\n");
         } while (false);
 
         // 実行結果

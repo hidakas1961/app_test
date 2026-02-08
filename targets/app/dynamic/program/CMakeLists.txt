@@ -1,23 +1,23 @@
 #==============================================================================
 # ダイナミックプログラム
+#------------------------------------------------------------------------------
 message(STATUS "ターゲット名：${TARGET_NAME}")
+#------------------------------------------------------------------------------
+# ソースファイル
 add_executable(${TARGET_NAME}
   ${PROJECT_SOURCE_DIR}/src/app/program/program.cpp
   ${PROJECT_SOURCE_DIR}/src/app/program/program_main.cpp
-  ${PROJECT_SOURCE_DIR}/src/app/program/program_sub.cpp
-  ${PROJECT_SOURCE_DIR}/src/app/program/program_c.c
-  ${PROJECT_SOURCE_DIR}/res/app/program/res_program.rc
 )
+#------------------------------------------------------------------------------
+# インクルードディレクトリ
 target_include_directories(${TARGET_NAME} PRIVATE
   $<$<OR:$<COMPILE_LANGUAGE:C>,$<COMPILE_LANGUAGE:CXX>>:
     "${PROJECT_SOURCE_DIR}/inc"
     "${PROJECT_SOURCE_DIR}/inc/app"
-    "${PROJECT_SOURCE_DIR}/inc/lib"
-    "${PROJECT_SOURCE_DIR}/res"
-    "${PROJECT_SOURCE_DIR}/res/app"
-    "${PROJECT_SOURCE_DIR}/res/lib"
   >
 )
+#------------------------------------------------------------------------------
+# コンパイルオプション
 target_compile_definitions(${TARGET_NAME} PRIVATE
   $<$<OR:$<COMPILE_LANGUAGE:C>,$<COMPILE_LANGUAGE:CXX>>:
     -D "PROJECT_DIR=LR\"!raw(${PROJECT_SOURCE_DIR})!raw\""
@@ -27,6 +27,8 @@ target_compile_definitions(${TARGET_NAME} PRIVATE
     -D APP_DYNAMIC
   >
 )
+#------------------------------------------------------------------------------
+# その他
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
 set(CMAKE_IMPORT_LIBRARY_PREFIX "")

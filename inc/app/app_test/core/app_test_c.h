@@ -28,6 +28,6 @@
 /// -          0以外 失敗
 /// @attention なし
 //-----------------------------------------------------------------------------
-extern int FuncC();
+extern int FuncAppTestC();
 
 #pragma managed(pop)

@@ -1,12 +1,17 @@
 #==============================================================================
 # ダイナミック共通ライブラリ
+#------------------------------------------------------------------------------
 message(STATUS "ターゲット名：${TARGET_NAME}")
+#------------------------------------------------------------------------------
+# ソースファイル
 add_library(${TARGET_NAME} SHARED
   ${PROJECT_SOURCE_DIR}/src/lib/lib_common/core/lib_common.cpp
   ${PROJECT_SOURCE_DIR}/src/lib/lib_common/core/lib_common_sub.cpp
   ${PROJECT_SOURCE_DIR}/src/lib/lib_common/core/lib_common_c.c
   ${PROJECT_SOURCE_DIR}/res/lib/lib_common/res_lib_common.rc
 )
+#------------------------------------------------------------------------------
+# インクルードディレクトリ
 target_include_directories(${TARGET_NAME} PRIVATE
   $<$<OR:$<COMPILE_LANGUAGE:C>,$<COMPILE_LANGUAGE:CXX>>:
     "${PROJECT_SOURCE_DIR}/inc"
@@ -15,6 +20,8 @@ target_include_directories(${TARGET_NAME} PRIVATE
     "${PROJECT_SOURCE_DIR}/res/lib"
   >
 )
+#------------------------------------------------------------------------------
+# コンパイルオプション
 target_compile_definitions(${TARGET_NAME} PRIVATE
   $<$<OR:$<COMPILE_LANGUAGE:C>,$<COMPILE_LANGUAGE:CXX>>:
     -D "PROJECT_DIR=LR\"!raw(${PROJECT_SOURCE_DIR})!raw\""
@@ -25,6 +32,8 @@ target_compile_definitions(${TARGET_NAME} PRIVATE
     -D LIB_DYNAMIC
   >
 )
+#------------------------------------------------------------------------------
+# その他
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
 set(CMAKE_IMPORT_LIBRARY_PREFIX "")

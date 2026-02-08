@@ -23,6 +23,9 @@
 #include <fcntl.h>
 #include <iostream>
 
+//=============================================================================
+// C言語インクルードファイル
+//-----------------------------------------------------------------------------
 extern "C" {
 #include "app_test/core/app_test_c.h"
 }
@@ -36,11 +39,6 @@ extern "C" {
 // 無名名前空間
 //-----------------------------------------------------------------------------
 namespace {
-    //=========================================================================
-    // ファイルスコープ文字列定数
-    //-------------------------------------------------------------------------
-    constexpr wchar_t const* const NAMESPCAE_NAME{L"テストアプリケーション"}; ///< 名前空間名
-
     //=========================================================================
     // ファイルスコープローカル変数
     //-------------------------------------------------------------------------
@@ -66,7 +64,8 @@ namespace program {
             // 漢字出力
             ::setlocale(LC_ALL, "");
             ::_setmode(_fileno(stdout), _O_U8TEXT);
-            ::wprintf(L"これはプログラムクラスのメイン関数です。\n");
+            ::wprintf(L"-------------------------------------------------------------------------------\n");
+            ::wprintf(L"プログラムクラス：メイン関数\n");
             // モジュールファイルパス取得
             wchar_t buffer[MAX_PATH]{};
             ::GetModuleFileNameW(s_hInstance, buffer, sizeof buffer/sizeof buffer[0]);
@@ -83,18 +82,15 @@ namespace program {
             ::wprintf(L"ターゲット種別：%ls\n", TARGET_TYPE);
             ::wprintf(L"プロジェクトディレクトリ：%ls\n", PROJECT_DIR);
             ::wprintf(L"モジュールファイルパス：%ls\n", buffer);
-            ::wprintf(L"-------------------------------------------------------------------------------\n");
             // サブ関数
             FuncAppTestSub();
-            ::wprintf(L"-------------------------------------------------------------------------------\n");
             // C言語関数
-            FuncC();
-            // 共通ライブラリインスタンス取得
+            FuncAppTestC();
+            // 共通ライブラリクラスインスタンス取得
             LibCommon::GetInstance();
-            // テストアプリケーションインスタンス取得
+            // テストアプリケーションクラスインスタンス取得
             app_test::AppTest::GetInstance();
         } while (false);
-        ::wprintf(L"プログラムクラス終了\n");
 
         // 実行結果
         return result;
@@ -128,7 +124,7 @@ namespace app_test {
         wchar_t const* result{};
         do {
             // 名前空間名取得
-            result = NAMESPCAE_NAME;
+            result = L"テストアプリケーション名前空間";
         } while (false);
 
         // 実行結果
@@ -159,16 +155,14 @@ namespace app_test {
     // コンストラクタ
     AppTest::AppTest() noexcept {
         ::wprintf(L"-------------------------------------------------------------------------------\n");
-        ::wprintf(L"%lsコンストラクタ\n", AppTest::GetObjectName());
-        Init();
+        ::wprintf(L"%ls：コンストラクタ\n", AppTest::GetObjectName());
     }
 
     //-------------------------------------------------------------------------
     // デストラクタ
     AppTest::~AppTest() noexcept {
-        ::wprintf(L"%lsデストラクタ\n", AppTest::GetObjectName());
-        Exit();
         ::wprintf(L"-------------------------------------------------------------------------------\n");
+        ::wprintf(L"%ls：デストラクタ\n", AppTest::GetObjectName());
     }
 
     //=========================================================================
@@ -179,7 +173,7 @@ namespace app_test {
         // 処理ブロック
         bool result{};
         do {
-            ::wprintf(L"テストアプリケーションクラス初期化\n");
+            ::wprintf(L"テストアプリケーションクラス：初期化関数\n");
         } while (false);
 
         // 実行結果
@@ -192,7 +186,7 @@ namespace app_test {
         // 処理ブロック
         bool result{true};
         do {
-            ::wprintf(L"テストアプリケーションクラス終了\n");
+            ::wprintf(L"テストアプリケーションクラス：終了関数\n");
         } while (false);
 
         // 実行結果

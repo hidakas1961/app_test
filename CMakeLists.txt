@@ -52,39 +52,31 @@ message(STATUS "CMAKE_ARCHIVE_OUTPUT_DIRECTORY：${CMAKE_ARCHIVE_OUTPUT_DIRECTOR
 message(STATUS "CMAKE_LIBRARY_OUTPUT_DIRECTORY：${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 #==============================================================================
-# ターゲット追加
-if (1)
-
+# ダイナミックアプリケーションターゲット追加
+#------------------------------------------------------------------------------
 # ダイナミック共通ライブラリ
 set(TARGET_NAME "lib_common")
-add_subdirectory("${PROJECT_SOURCE_DIR}/targets/lib/dynamic//${TARGET_NAME}")
-
-# ダイナミックテストアプリケーション
-set(TARGET_NAME "app_test")
-add_subdirectory("${PROJECT_SOURCE_DIR}/targets/app/dynamic/${TARGET_NAME}")
-target_link_libraries("${TARGET_NAME}" PRIVATE lib_common)
-
+add_subdirectory("${PROJECT_SOURCE_DIR}/targets/lib/dynamic/${TARGET_NAME}")
+#------------------------------------------------------------------------------
 # ダイナミックプログラム
 set(TARGET_NAME "program")
 add_subdirectory("${PROJECT_SOURCE_DIR}/targets/app/dynamic/${TARGET_NAME}")
-target_link_libraries("${TARGET_NAME}" PRIVATE lib_common)
+#------------------------------------------------------------------------------
+# ダイナミックテストアプリケーション
+set(TARGET_NAME "app_test")
+add_subdirectory("${PROJECT_SOURCE_DIR}/targets/app/dynamic/${TARGET_NAME}")
 
-endif()
-
-if (1)
-
+#==============================================================================
+# スタティックアプリケーションターゲット追加
+#------------------------------------------------------------------------------
 # スタティック共通ライブラリ
 set(TARGET_NAME "static_lib_common")
-add_subdirectory("${PROJECT_SOURCE_DIR}/targets/lib/static//${TARGET_NAME}")
-
-# スタティックテストアプリケーション
-set(TARGET_NAME "static_app_test")
-add_subdirectory("${PROJECT_SOURCE_DIR}/targets/app/static/${TARGET_NAME}")
-target_link_libraries(${TARGET_NAME} PRIVATE static_lib_common)
-
+add_subdirectory("${PROJECT_SOURCE_DIR}/targets/lib/static/${TARGET_NAME}")
+#------------------------------------------------------------------------------
 # スタティックプログラム
 set(TARGET_NAME "static_program")
 add_subdirectory("${PROJECT_SOURCE_DIR}/targets/app/static/${TARGET_NAME}")
-target_link_libraries(${TARGET_NAME} PRIVATE static_lib_common)
-
-endif()
+#------------------------------------------------------------------------------
+# スタティックテストアプリケーション
+set(TARGET_NAME "static_app_test")
+add_subdirectory("${PROJECT_SOURCE_DIR}/targets/app/static/${TARGET_NAME}")

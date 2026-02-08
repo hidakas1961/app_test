@@ -43,7 +43,7 @@ int wmain(int argc, wchar_t* argv[]) {
         // 実行モジュールインスタンスハンドル取得
         HMODULE hInstance = ::GetModuleHandleW(nullptr);
 
-        // アプリケーションプログラムクラスを開始する
+        // プログラムクラスを開始する
         if (Program::Startup(hInstance)) {
             // 成功！
             result = 0;
@@ -71,7 +71,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     // 処理ブロック
     int result{ -1 };
     do {
-        // アプリケーションプログラムクラスを開始する
+        // プログラムクラスを開始する
         if (Program::Startup(hInstance)) {
             // 成功！
             result = 0;
@@ -102,7 +102,7 @@ int main(int argc, char* argv[]) {
         // 実行モジュールインスタンスハンドル取得
         HMODULE hInstance = ::GetModuleHandleW(nullptr);
 
-        // アプリケーションプログラムクラスを開始する
+        // プログラムクラスを開始する
         if (Program::Startup(hInstance)) {
             // 成功！
             result = 0;
@@ -130,7 +130,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     // 処理ブロック
     int result{ -1 };
     do {
-        // アプリケーションプログラムクラスを開始する
+        // プログラムクラスを開始する
         if (Program::Startup(hInstance)) {
             // 成功！
             result = 0;
@@ -150,7 +150,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 //-----------------------------------------------------------------------------
 namespace program {
     //=========================================================================
-    // アプリケーションプログラムクラス
+    // プログラムクラス
     //=========================================================================
     // 静的公開関数
     //-------------------------------------------------------------------------
